@@ -8,6 +8,12 @@ exports.signup = function (req, res, next) {
 	/* ==test if the post request is working==
   res.send({ success: true });
   */
+
+	if (!email || !password) {
+		return res
+			.status(422)
+			.send({ error: 'You must provide email and password' });
+	}
 	// see if a user with the given email exists
 	User.findOne({ email: email }, function (err, existingUser) {
 		if (err) {
